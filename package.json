@@ -8,8 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "discord-oauth2": "^2.2.0",
+    "mysql2": "^2.1.0",
     "next": "9.3.5",
+    "next-session": "^3.2.3",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "sequelize": "^6.2.3"
   }
 }

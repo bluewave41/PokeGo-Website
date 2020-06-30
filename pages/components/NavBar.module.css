@@ -1,0 +1,19 @@
+#tabs a {
+    background-color: black;
+    margin: auto 0;
+    margin-left: 20px;
+}
+
+#tabs {
+    background-color: black;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#tabs img {
+    background-color: black;
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
