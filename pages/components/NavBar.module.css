@@ -2,6 +2,11 @@
     background-color: black;
     margin: auto 0;
     margin-left: 20px;
+    text-decoration: none;
+}
+
+#tabs a:hover {
+    color: blue;
 }
 
 #tabs {

@@ -11,6 +11,7 @@ const NavBar = (props) => {
                 <img src="/avatar.png" alt="PokeGo Logo" />
                 <Link href='/'><a>Home</a></Link>
                 <Link href='/pokemon'><a>Pokemon</a></Link>
+                <Link href='/info'><a>Info</a></Link>
                 {element}
             </div>
             <hr/>
