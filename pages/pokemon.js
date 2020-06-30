@@ -7,14 +7,19 @@ import PokemonInfoComponent from './components/PokemonInfoComponent';
 
 export default function Pokemon(props) {
     const [pokemonInfo, setPokemonInfo] = useState(0);
+    const [filterName, setFilterName] = useState('');
+    console.log(filterName);
     const onClick = (pokemonInfo) => {
         setPokemonInfo(pokemonInfo);
+    }
+    const goBack = () => {
+        setPokemonInfo(0);
     }
     if(pokemonInfo) {
         return (
             <div>
                 <NavBar discordID={props.discordID} avatarID={props.avatarID}/>
-                <PokemonInfoComponent pokemonInfo={pokemonInfo}/>
+                <PokemonInfoComponent pokemonInfo={pokemonInfo} onClick={goBack}/>
             </div>
         )
     }
@@ -23,12 +28,29 @@ export default function Pokemon(props) {
             <div className="container">
                 <NavBar discordID={props.discordID} avatarID={props.avatarID}/>
                 <main>
+                    <div>
+                        <input type="text" placeholder="Filter" onChange={(e) => setFilterName(e.target.text)}></input>
+                    </div>
                     <div className="grid">
                         {props.pokemon.map(function(el) {
-                            return <PokemonComponent pokemonInfo={el} onClick={onClick}/>
+                            if(el.name.includes(filterName)) {
+                                return <PokemonComponent pokemonInfo={el} onClick={onClick}/>
+                            }
                         })}
                     </div>
                 </main>
+                <style jsx>{`
+                    div {
+                        text-align: center;
+                    }
+                    input {
+                        text-align: center;
+                        border-radius: 25%;
+                    }
+                    input:focus {
+                        outline-width: 0;
+                    }
+                `}</style>
             </div>
         )
     }

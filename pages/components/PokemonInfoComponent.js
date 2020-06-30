@@ -6,7 +6,7 @@ const PokemonInfoComponent = (props) => {
             <h2>{props.pokemonInfo.name}</h2>
             <img src={props.pokemonInfo.thumbnail} />
             <p>ID: {props.pokemonInfo.id}</p>
-            <p>Active: {props.pokemonInfo.active}</p>
+            <p>Active: {props.pokemonInfo.active == 0 ? 'false' : 'true'}</p>
             <p>Level: {props.pokemonInfo.level}</p>
             <br/>
             <p>HP: {props.pokemonInfo.hp}</p>
@@ -23,6 +23,7 @@ const PokemonInfoComponent = (props) => {
             <p>Sp. Def IV: {props.pokemonInfo.spdefIV}</p>
             <p>Speed IV: {props.pokemonInfo.speedIV}</p>
             <p>Total IV: {props.pokemonInfo.totalIV}%</p>
+            <button onClick={props.onClick}>Return</button>
             <style jsx>{`
                 p {
                     margin: 0;
