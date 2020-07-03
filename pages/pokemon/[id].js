@@ -23,7 +23,7 @@ export async function getServerSideProps({req, res, query}) {
     if(!req.session.user) {
         return {props: {}};
     }
-    let response = await axios.post(process.env.API_LINK + '/api/getSinglePokemon', {uniqueDisplayID: query.id}, {headers: req ? { cookie: req.headers.cookie } : undefined});
+    let response = await axios.post(process.env.API_URL + '/api/getSinglePokemon', {uniqueDisplayID: query.id}, {headers: req ? { cookie: req.headers.cookie } : undefined});
     return {
         props: {
             discordID: req.session.user.id,
