@@ -91,6 +91,9 @@ module.exports = {
         let pokemon = await db.pokemon.findOne({
             where: {userID: userID, id: uniquePokemonID}
         });
+        if(!pokemon) {
+            return null;
+        }
         pokemon.setDataValue('name', PokemonData[pokemon.pokemonID].name);
         return pokemon;
     },

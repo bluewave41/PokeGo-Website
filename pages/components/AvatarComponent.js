@@ -3,11 +3,15 @@ import React from 'react';
 const AvatarComponent = (props) => {
 	return (
         <>
-		    <img className='avatar' src={`https://cdn.discordapp.com/avatars/${props.discordID}/${props.avatarID}`} />
+		    <span>{props.username}</span><img className='avatar' src={props.link} />
             <style jsx>{`
                 .avatar {
                     border-radius: 50%;
+                }
+                span {
                     margin-left: auto;
+                    margin-right: 10px;
+                    background-color: black;
                 }
             `}</style>
         </>

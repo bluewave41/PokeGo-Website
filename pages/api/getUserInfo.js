@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         res.end();
 	}
 	else {
-		res.send({text: 'Not logged in'});
+		res.send({error: 'Not logged in'});
 		res.end();
 	}
 }

@@ -1,24 +1,25 @@
 import Head from 'next/head';
-import AvatarComponent from './components/AvatarComponent';
 import { applySession } from 'next-session';
 import NavBar from './components/NavBar';
 
 export default function Home(props) {
-    let element = props.username ? `You're logged in as ${props.username}` : '';
 	return (
 		<div className="container">
-            <NavBar discordID={props.discordID} avatarID={props.avatarID}/>
-			<Head>
-				<title>Create Next App</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+            <NavBar discordID={props.discordID} avatarID={props.avatarID} discriminator={props.discriminator} username={props.username}/>
 
 			<main>
-                <p>Welcome to PokeGo!</p>
-                <p>{element}</p>
+                <h1>PokeGo</h1>
 				<br/>
-				<a href='https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauthorize&response_type=code&scope=identify'>Login</a>
+                <p>This page is pretty plain right now until I can figure out what to put here!</p>
 			</main>
+            <style jsx>{`
+                h1 {
+                    text-align: center;
+                }
+                p {
+                    text-align: center;
+                }
+            `}</style>
 		</div>
 	)
 }
@@ -31,6 +32,7 @@ export async function getServerSideProps({ req, res }) {
     return {
         props: {
             discordID: req.session.user.id,
+            discriminator: req.session.user.discriminator,
             avatarID: req.session.user.avatar,
             username: req.session.user.username,
         }
