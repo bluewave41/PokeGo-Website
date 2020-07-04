@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Sidebar.module.css';
+import styles from './SideBar.module.css';
 
 const SideBar = (props) => {
 	const commands = ['Active', 'Bug Report', 'Catch', 'Daily', 'Display', 'Evolve', 'Favorite', 'Help', 'Info', 'Inventory',
