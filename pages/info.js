@@ -17,7 +17,7 @@ export default function Info(props) {
 
 export async function getServerSideProps({ req, res }) {
     await applySession(req, res);
-    let info = await axios.post('http://localhost:3000/api/getUserInfo', {},  {headers: req ? { cookie: req.headers.cookie } : undefined});
+    let info = await axios.post(process.env.API_URL + '/api/getUserInfo', {},  {headers: req ? { cookie: req.headers.cookie } : undefined});
     if(info.data.error) {
         res.writeHead(302, {Location: '/'});
         res.end();

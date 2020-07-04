@@ -12,7 +12,6 @@ export default function BugReports(props) {
                 <div id="content">
                     {props.bugreports.map(function(el) {
                         let user = el.User;
-                        console.log(user);
                         return <BugReportComponent username={user.username} discordID={user.discordID} message={el.message} response={el.response}
                                                    admin={props.admin} id={el.id}/>
                     })}
@@ -37,7 +36,6 @@ export default function BugReports(props) {
 export async function getServerSideProps({ req, res }) {
     await applySession(req, res);
     let response = await axios.post(process.env.API_URL + '/api/getBugReports', {}, {headers: req ? { cookie: req.headers.cookie } : undefined});
-    console.log(response.data);
     if(response.data.error) {
         res.writeHead(302, {Location: '/'});
         res.end();

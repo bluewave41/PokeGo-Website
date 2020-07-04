@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './SideBar.module.css';
+import styles from './Sidebar.module.css';
 
 const SideBar = (props) => {
-	const commands = ['Active', 'Catch', 'Daily', 'Display', 'Evolve', 'Favorite', 'Help', 'Info', 'Inventory',
+	const commands = ['Active', 'Bug Report', 'Catch', 'Daily', 'Display', 'Evolve', 'Favorite', 'Help', 'Info', 'Inventory',
 					  'List', 'Nickname', 'Pokedex', 'Prefix', 'Quit', 'Search', 'Shop', 'Starter', 'Trade',
 					  'Tradelist', 'Transfer', 'Use'];
 					  
@@ -11,6 +11,8 @@ const SideBar = (props) => {
 	}
 	return(
 		<div className={styles.sidenav}>
+			<h2 className={styles.header}>Commands</h2>
+			<hr></hr>
 			{commands.map((el) => <a href="#" onClick={changePage}>{el}</a>)}
 		</div>
 	);

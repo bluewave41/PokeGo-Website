@@ -24,6 +24,7 @@ import QuitComponent from './components/help/QuitComponent';
 import FavoriteComponent from './components/help/FavoriteComponent';
 import HelpComponent from './components/help/HelpComponent';
 import UseComonent from './components/help/UseComponent';
+import BugReportComponent from './components/help/BugReportComponent';
 import NavBar from './components/NavBar';
 import { applySession } from 'next-session';
 
@@ -31,6 +32,7 @@ export default function Help(props) {
 	const [page, setPage] = useState('');
 	const components = {
 		'Active': <ActiveComponent />,
+		'Bug Report': <BugReportComponent />,
 		'Catch': <CatchComponent />,
 		'Daily': <DailyComponent />,
         'Evolve': <EvolveComponent />,
