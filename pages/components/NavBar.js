@@ -18,6 +18,7 @@ const NavBar = (props) => {
     if(props.discordID) {
         tabs.push({href:'/pokemon', text: 'Pokemon'});
         tabs.push({href: '/info', text: 'Info'});
+        tabs.push({href: '/bugreports', text: 'Bug Reports'});
     }
     tabs.push({href: '/help', text: 'Help'});
     tabs.push({href: '/tools', text: 'Tools'});

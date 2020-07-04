@@ -14,7 +14,11 @@ export default async function handler(req, res) {
 		redirectUri: 'http://localhost:3000/api/authorize'
 	})
     let userInfo = await oauth.getUser(token.access_token);
-    userInfo.userID = await UserCommands.getUserID(userInfo.id); //set userID so we don't have to get everywhere
+    let sessionInfo = await UserCommands.getSessionInfo(userInfo.id);
+    console.log(sessionInfo);
+    userInfo.userID = sessionInfo.userID;
+    userInfo.admin = sessionInfo.admin;
+    console.log(userInfo);
 	req.session.user = userInfo;
 	await req.session.commit();
 	res.writeHead(301, {Location: '/'});

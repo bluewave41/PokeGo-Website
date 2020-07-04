@@ -7,7 +7,8 @@ export default function MyApp({ Component, pageProps }) {
         	<Head>
 				<title>PokeGo</title>
 				<link rel="icon" href="/favicon.ico" />
-			</Head>
+                <meta name="description" content="Official Pokego website"></meta>
+            </Head>
             <Component {...pageProps} />
         </>
     )
