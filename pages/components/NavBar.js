@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './NavBar.module.css';
 import AvatarComponent from './AvatarComponent';
+import LogoComponent from './LogoComponent';
 
 const NavBar = (props) => {
     let link;
@@ -34,7 +35,7 @@ const NavBar = (props) => {
     return (
         <div>
             <div id={styles.tabs}>
-                <img src="/avatar.png" alt="PokeGo Logo" />
+                <LogoComponent />
                 {tabs.map(function(el) {
                     return <Link href={el.href}><a>{el.text}</a></Link>
                 })}
