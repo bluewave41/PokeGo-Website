@@ -25,9 +25,10 @@ const NavBar = (props) => {
     tabs.push({href: '/tools', text: 'Tools'});
     if(!props.discordID) {
         if(process.env.NODE_ENV == 'production') {
-            tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=http%3A%2F%2Fbluewave41.xyz%3A3000%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
+            tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=https%3A%2F%2Fbluewave41.xyz%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
         }
         else {
+            tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=https%3A%2F%2Fbluewave41.xyz%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
             tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
         }
     }
