@@ -1,5 +1,4 @@
 import { applySession } from 'next-session';
-const db = require('../../lib/db.js');
 const PokemonCommands = require('./PokemonCommands');
 
 export default async function handler(req, res) {

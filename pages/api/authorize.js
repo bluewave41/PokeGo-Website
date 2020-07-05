@@ -5,7 +5,7 @@ const UserCommands = require('./UserCommands');
 
 export default async function handler(req, res) {
     await applySession(req, res);
-    let redirect = process.env.NODE_ENV == 'production' ? 'https://bluewave41.xyz/api/authorize' : 'http://localhost:3000/api/authorize';
+    let redirect = process.platform == 'win32' ? 'http://localhost:3000/api/authorize' : 'https://bluewave41.xyz/api/authorize';
 	let token = await oauth.tokenRequest({
 		clientId: '721674409659858965',
 		clientSecret: 'JHfpaK2YRTDkdcHNdO1yZNPiq0YjbuIk',

@@ -12,9 +12,6 @@ export default function Pokemon(props) {
     const onClick = (pokemonInfo) => {
         setPokemonInfo(pokemonInfo);
     }
-    const goBack = () => {
-        setPokemonInfo(0);
-    }
     if(props.pokemon.length == 0) {
         return (
             <div>
@@ -27,7 +24,7 @@ export default function Pokemon(props) {
         return (
             <div>
             <NavBar discordID={props.discordID} avatarID={props.avatarID} discriminator={props.discriminator} username={props.username}/>
-                <PokemonInfoComponent pokemonInfo={pokemonInfo} onClick={goBack}/>
+                <PokemonInfoComponent pokemonInfo={pokemonInfo} />
             </div>
         )
     }

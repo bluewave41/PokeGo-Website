@@ -9,18 +9,17 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const fs = require('fs');
 
-if(dev) {
+if(process.platform == 'win32') {
 	app.prepare().then(() => {
 		http.createServer((req, res) => {
 			// Be sure to pass `true` as the second argument to `url.parse`.
 			// This tells it to parse the query portion of the URL.
 			const parsedUrl = parse(req.url, true);
 			const { pathname, query } = parsedUrl;
-			console.log(parsedUrl);
 			handle(req, res, parsedUrl)
 		}).listen(process.env.port, (err) => {
 		if (err) throw err
-			console.log(`> Ready on http://localhost:${process.env.port}`)
+			console.log(`>Windows | Ready on http://localhost:${process.env.port}`)
 		})
 	})
 }
@@ -39,7 +38,7 @@ else {
 			handle(req, res, parsedUrl)
 		}).listen(process.env.port, (err) => {
 		if (err) throw err
-			console.log(`> Ready on http://localhost:${process.env.port}`)
+			console.log(`>Linux | Ready on http://localhost:${process.env.port}`)
 		})
 	});
 	
@@ -48,5 +47,5 @@ else {
 		res.end();
 	});
 	
-	httpServer.listenn(80);
+	httpServer.listen(80);
 }
