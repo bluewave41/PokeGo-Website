@@ -7,7 +7,7 @@ const LogoutComponent = () => {
     }
     return (
         <>
-            <img src="logout.svg" title="Logout" alt="Logout" onClick={onClick}/>
+            <img src="/logout.svg" title="Logout" alt="Logout" onClick={onClick}/>
             <style jsx>{`
                 img {
                     background-color: white;
