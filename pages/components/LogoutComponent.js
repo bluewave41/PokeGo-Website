@@ -5,7 +5,6 @@ const LogoutComponent = () => {
     const onClick = (e) => {
         axios.post('/api/logout').then(function() {
             window.location.reload();
-            console.log('reloaded');
         });
     }
     return (
