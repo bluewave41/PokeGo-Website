@@ -21,7 +21,7 @@ export async function getServerSideProps({ req, res }) {
     if(info.data.error) {
         res.writeHead(302, {Location: '/'});
         res.end();
-        return;
+        return {props: {}}
     }
     return {
 		props: {

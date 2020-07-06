@@ -65,18 +65,14 @@ export default function Help(props) {
 			<SideBar setPage={setPage} />
 
             <div className="main">
-                <h1>{page}</h1>
-			    {componentName}
+                <div className="center">
+                    <h1>{page}</h1>
+			        {componentName}
+                </div>
             </div>
             <style jsx>{`
-                .changePage a {
-                    margin-left: 50px;
-                    margin-right: 50px;
-                    color: black;
-                }
-                ul {
-                    display: table;
-                    margin: 0 auto;
+                .center {
+                    text-align: center;
                 }
                 h1 {
                     text-align: center;

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const page1 = () => {
 	return (
 		<div>
-			<h1>Starting a trade</h1>
+			<h2>Starting a trade</h2>
 			<p>To begin a trade enter the following command: !trade @mention pokemonID</p>
 			<p>This will add the trade to your outgoing !tradelist and the mentioned persons incoming !tradelist.</p>
 		</div>
@@ -13,7 +13,7 @@ const page1 = () => {
 const page2 = () => {
 	return (
 		<div>
-			<h1>Offering a Pokemon</h1>
+			<h2>Offering a Pokemon</h2>
 			<p>Once a trade has been started the other player must offer a Pokemon. They can do so with !trade tradeID pokemonID</p>
 			<p>Example: !trade 1 327</p>
 			<p>This will add their Pokemon to the the trade.</p>
@@ -24,7 +24,7 @@ const page2 = () => {
 const page3 = () => {
 	return (
 		<div>
-			<h1>Confirming the trade</h1>
+			<h2>Confirming the trade</h2>
 			<p>Both players now need to confirm the trade with !trade tradeID confirm</p>
 			<p>Once a player has confirmed a trade a checkmark will appear next the their Pokemons name in the !tradelist menu.</p>
 			<p>Once both players have confirmed their trade the trade will be performed and the Pokemon will swap owners.</p>
@@ -35,7 +35,7 @@ const page3 = () => {
 const page4 = () => {
 	return (
 		<div>
-			<h1>Deleting trades</h1>
+			<h2>Deleting trades</h2>
 			<p>At any point either player can use !trade tradeID delete to remove the trade from both players !tradelist.</p>
 		</div>
 	)
@@ -72,9 +72,13 @@ const TradeTutorial = () => {
 	return (
 		<div>
 			{page}
-			<div className="changePage">
-				<a href="#" onClick={changePage}>Previous</a><a href="#" onClick={changePage}>Next</a>
-			</div>
+			<div className="center"><a href="#" onClick={changePage}>Previous</a><a href="#" onClick={changePage}>Next</a></div>
+            <style jsx>{`
+                .center {
+                    display: flex;
+                    justify-content: space-around;
+                }
+            `}</style>
 		</div>
 	)
 }

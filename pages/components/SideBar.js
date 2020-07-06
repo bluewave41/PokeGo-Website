@@ -13,7 +13,7 @@ const SideBar = (props) => {
 		<div className={styles.sidenav}>
 			<h2 className={styles.header}>Commands</h2>
 			<hr></hr>
-			{commands.map((el) => <a href="#" onClick={changePage}>{el}</a>)}
+			{commands.map((el, index) => <a href="#" key={index} onClick={changePage}>{el}</a>)}
 		</div>
 	);
 }

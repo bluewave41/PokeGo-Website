@@ -6,10 +6,9 @@ const PrefixComponent = () => {
 			<p>Changes the prefix of the bot for the server the command is run in.</p>
 			<p>Usage: !prefix [new prefix]</p>
 			<p>Examples: !prefix p!, !prefix !</p>
+            <br/>
 			<h4>Notes</h4>
-			<ul>
-				<li>Requires Manage Guild permissions</li>
-			</ul>
+			<p>Requires Manage Guild permissions</p>
 		</div>
 	)
 }

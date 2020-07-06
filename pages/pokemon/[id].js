@@ -1,12 +1,9 @@
-import { useRouter } from 'next/router';
 import PokemonInfoComponent from '../components/PokemonInfoComponent';
 import { applySession } from 'next-session';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
 
 export default function Pokemon(props) {
-    const router = useRouter();
-    const { id } = router.query;
     let component = props.pokemonInfo.error ? <p>{props.pokemonInfo.error}</p> : <PokemonInfoComponent pokemonInfo={props.pokemonInfo}/>;
     return (
         <div>
@@ -21,6 +18,8 @@ export default function Pokemon(props) {
 export async function getServerSideProps({req, res, query}) {
     await applySession(req, res);
     if(!req.session.user) {
+        res.writeHead(302, {Location: '/'});
+        res.end();
         return {props: {}};
     }
     let response = await axios.post(process.env.API_URL + '/api/getSinglePokemon', {uniqueDisplayID: query.id}, {headers: req ? { cookie: req.headers.cookie } : undefined});

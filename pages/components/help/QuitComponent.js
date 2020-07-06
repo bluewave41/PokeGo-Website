@@ -5,7 +5,9 @@ const QuitComponent = () => {
 		<div>
 			<p>Quits either an encounter taking you back to the search screen or leaves a search early.</p>
 			<p>Usage: !quit</p>
-			<p>Requirements: being in an encounter or having a search started.</p>
+            <br/>
+            <h4>Notes</h4>
+            <p>You must have started an adventure or be in an encounter to use this.</p>
 		</div>
 	)
 }

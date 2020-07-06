@@ -5,11 +5,10 @@ const BugReportComponent = () => {
 		<div>
 			<p>Submits a bug report. These can be viewed in the bug reports tab.</p>
 			<p>Usage: !bugreport [message]</p>
+            <br/>
 			<h4>Notes</h4>
-			<ul>
-				<li>Message must be 200 character or less.</li>
-				<li>Message can't be empty.</li>
-			</ul>
+			<p>Message must be 200 character or less.</p>
+			<p>Message can't be empty.</p>
 		</div>
 	)
 }

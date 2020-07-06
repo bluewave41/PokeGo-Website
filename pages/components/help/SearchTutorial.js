@@ -4,10 +4,8 @@ const page1 = () => {
 	return (
 		<div>
 			<p>To begin searching ensure you have the following:</p>
-			<ul>
-				<li>A Poke Ball</li>
-				<li>A Travel Ticket</li>
-			</ul>
+			<p>- A Poke Ball</p>
+			<p>- A Travel Ticket</p>
 			<p>To begin type in !search to bring up a map of entities. Doing this will consume your Travel Ticket but you can get it back later.</p>
 			<img src='/tutorial1.png' />
 			
@@ -33,6 +31,8 @@ const page3 = () => {
 		<div>
 			<p>You can block off a square by sending coordinates in the form of row column as shown below.</p>
 			<img src='/tutorial3.png'/>
+            <p>You can also send coordinates in the form of x.y (2.4) which should help mobile users.</p>
+            <br/>
 			<p>This blocks a square and Pinsir can no longer move there.</p>
 			<p>Your chance of success using !catch depends on how many squares a Pokemon can move to.</p>
 			<p>In the above image Pinsir can move to a total of 22 squares.</p>
@@ -82,7 +82,13 @@ const SearchTutorial = () => {
 	return (
 		<div>
 			{page}
-			<a href="#" onClick={changePage}>Previous</a><a href="#" onClick={changePage}>Next</a>
+			<div className="center"><a href="#" onClick={changePage}>Previous</a><a href="#" onClick={changePage}>Next</a></div>
+            <style jsx>{`
+                .center {
+                    display: flex;
+                    justify-content: space-around;
+                }
+            `}</style>
 		</div>
 	)
 }

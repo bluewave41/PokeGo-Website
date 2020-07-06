@@ -72,6 +72,7 @@ export async function getServerSideProps({ req, res }) {
     if(pokemon.data.error) {
         res.writeHead(302, {Location: '/'});
         res.end();
+        return {props: {}}
     }
     return {
 		props: {

@@ -67,6 +67,7 @@ export default function Home(props) {
 
 export async function getServerSideProps({ req, res }) {
     await applySession(req, res);
+    console.log('INDEX PROPS', req.session);
     if(!req.session.user) {
         return {props: {}};
     }

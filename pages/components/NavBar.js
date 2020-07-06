@@ -25,11 +25,11 @@ const NavBar = (props) => {
     tabs.push({href: '/tools', text: 'Tools'});
     if(!props.discordID) {
         if(process.platform == 'linux') {
-            tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=https%3A%2F%2Fbluewave41.xyz%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
+            tabs.push({anchor: true, href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=https%3A%2F%2Fbluewave41.xyz%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
         }
         else {
-            tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=https%3A%2F%2Fbluewave41.xyz%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
-            tabs.push({href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
+            tabs.push({anchor: true, href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=https%3A%2F%2Fbluewave41.xyz%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
+            tabs.push({anchor: true, href: 'https://discord.com/api/oauth2/authorize?client_id=721674409659858965&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauthorize&response_type=code&scope=identify', text: 'Login'});
         }
     }
 
@@ -37,8 +37,14 @@ const NavBar = (props) => {
         <div>
             <div id={styles.tabs}>
                 <LogoComponent />
-                {tabs.map(function(el) {
-                    return <Link href={el.href}><a>{el.text}</a></Link>
+                {tabs.map(function(el, index) {
+                    if(el.anchor) {
+                        return <a key={index} href={el.href}>{el.text}</a>
+
+                    }
+                    else {
+                        return <Link key={index} href={el.href}><a>{el.text}</a></Link>
+                    }
                 })}
                 {element}
             </div>

@@ -5,10 +5,9 @@ const FavoriteCommand = () => {
 		<div>
 			<p>Adds a Pokemon to your favorite list.</p>
 			<p>Usage: !favorite [pokemonID]</p>
+            <br/>
 			<p>Notes: </p>
-			<ul>
-				<li>Favorite Pokemon cannot be transferred</li>
-			</ul>
+			<p>Favorite Pokemon cannot be transferred</p>
 		</div>
 	)
 }

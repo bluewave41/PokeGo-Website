@@ -39,6 +39,7 @@ export async function getServerSideProps({ req, res }) {
     if(response.data.error) {
         res.writeHead(302, {Location: '/'});
         res.end();
+        return {props: {}}
     }
     return {
         props: {

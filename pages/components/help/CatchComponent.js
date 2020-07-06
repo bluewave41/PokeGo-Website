@@ -6,11 +6,10 @@ const CatchCommand = () => {
 			<p>Use a Pokeball to attempt to catch the encountered Pokemon</p>
 			<p>Usage: !catch</p>
 			<h4>Notes</h4>
-			<ul>
-				<li>Can only be used while in an encounter with !search</li>
-				<li>Uses a Pokeball on each attempt</li>
-				<li>Chances increase with the fewer number of spaces a Pokemon can move to</li>
-			</ul>
+            <br/>
+			<p>Can only be used while in an encounter with !search</p>
+			<p>Uses a Pokeball on each attempt</p>
+			<p>Chances increase with the fewer number of spaces a Pokemon can move to</p>
 		</div>
 	)
 }

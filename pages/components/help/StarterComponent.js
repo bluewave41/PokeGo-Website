@@ -5,11 +5,10 @@ const StarterComponent = () => {
 		<div>
 			<p>Allows you to choose a starter Pokemon.</p>
 			<p>Usage: !starter</p>
+            <br/>
 			<h4>Notes</h4>
-			<ul>
-				<li>Can only be used once.</li>
-				<li>Gives you 10 Pokeballs and 1 Travel Ticket to start.</li>
-			</ul>
+			<p>Can only be used once.</p>
+			<p>Gives you 10 Pokeballs and 1 Travel Ticket to start.</p>
 		</div>
 	)
 }
