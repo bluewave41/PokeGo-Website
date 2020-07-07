@@ -25,6 +25,7 @@ import FavoriteComponent from './components/help/FavoriteComponent';
 import HelpComponent from './components/help/HelpComponent';
 import UseComonent from './components/help/UseComponent';
 import BugReportComponent from './components/help/BugReportComponent';
+import RedeemComponent from './components/help/RedeemComponent';
 import NavBar from './components/NavBar';
 import { applySession } from 'next-session';
 
@@ -55,6 +56,7 @@ export default function Help(props) {
 		'Quit': <QuitComponent />,
         'Favorite': <FavoriteComponent />,
         'Use': <UseComonent />,
+		'Redeem': <RedeemComponent />,
 		'': <WelcomeComponent />
 	}
     const componentName = components[page];

@@ -3,7 +3,7 @@ import styles from './SideBar.module.css';
 
 const SideBar = (props) => {
 	const commands = ['Active', 'Bug Report', 'Catch', 'Daily', 'Display', 'Evolve', 'Favorite', 'Help', 'Info', 'Inventory',
-					  'List', 'Nickname', 'Pokedex', 'Prefix', 'Quit', 'Search', 'Shop', 'Starter', 'Trade',
+					  'List', 'Nickname', 'Pokedex', 'Prefix', 'Quit', 'Redeem', 'Search', 'Shop', 'Starter', 'Trade',
 					  'Tradelist', 'Transfer', 'Use'];
 					  
 	const changePage = event => {
