@@ -1,0 +1,53 @@
+.pokemoninfobox {
+    text-align: center;
+    border: 2px solid white;
+    width: 300px;
+    margin: 0 auto;
+}
+
+#pokemonimage {
+    position: relative;
+    right: 60px;
+    top: 20px;
+    width: 90px;
+    height: 120px;
+}
+
+#pokemoninfo {
+    position: relative;
+    left: 150px;
+    bottom: 80px;
+    width: 100px;
+}
+
+.statsbox {
+    border: 2px solid white;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.ivsbox {
+    border: 2px solid white;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.stativtitle {
+    margin-left: 10px;
+}
+
+.stativtextleft {
+    margin-left: 10px;
+}
+
+.stativtextright {
+    position: relative;
+    left: 150px;
+    bottom: 72px;
+    width: 100px;
+}
+
+#totaliv {
+    margin-left: 10px;
+
+}

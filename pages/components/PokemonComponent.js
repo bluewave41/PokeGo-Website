@@ -2,13 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 
 const PokemonComponent = (props) => {
-    const onClick = () => {
-        props.onClick(props.pokemonInfo);
+    if(!props.pokemonInfo) {
+        return <div></div>
     }
     return (
         <div>
             <h2>{props.pokemonInfo.name}</h2>
-            <img src={props.pokemonInfo.thumbnail} onClick={onClick} />
+            <Link href='/pokemon/[id]' as={`/pokemon/${props.pokemonInfo.id}`}><img src={props.pokemonInfo.thumbnail} /></Link>
         </div>
     )
 }

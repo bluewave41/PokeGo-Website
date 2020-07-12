@@ -1,11 +1,15 @@
 import './styles.css'
-import NavBar from './components/NavBar';
-import { applySession } from 'next-session';
+import Head from 'next/head';
 
 export default function MyApp({ Component, pageProps }) {
     return (
         <>
-                <Component {...pageProps} />
+        	<Head>
+				<title>PokeGo</title>
+				<link rel="icon" href="/favicon.ico" />
+                <meta name="description" content="Official Pokego website"></meta>
+            </Head>
+            <Component {...pageProps} />
         </>
     )
 }

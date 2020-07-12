@@ -1,11 +1,12 @@
 {
+  "homepage": "http://www.bluewave41.xyz",
   "name": "learn-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "set NODE_ENV=production && node server.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -15,6 +16,7 @@
     "next-session": "^3.2.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "request": "^2.88.2",
     "sequelize": "^6.2.3"
   }
 }

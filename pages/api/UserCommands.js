@@ -20,6 +20,16 @@ module.exports = {
             where: {userID: userID}
         });
     },
+    async getSessionInfo(discordID) {
+        let user = await db.user.findOne({
+            attributes: ['userID', 'admin'],
+            where: {discordID: discordID}
+        });
+        if(user) {
+            return {userID: user.userID, admin: user.get('admin')}
+        }
+        return -1;
+    },
     async getUserID(discordID) {
         let user = await db.user.findOne({
             attributes: ['userID'],
