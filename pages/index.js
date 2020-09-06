@@ -8,6 +8,7 @@ export default function Home(props) {
 
 			<main>
                 <h1>PokeGo</h1>
+				<p>The casual Pokemon catching experience.</p>
 				<br/>
                 <h2>What makes this different from other Pokemon bots?</h2>
                 <div className="column">
@@ -67,7 +68,6 @@ export default function Home(props) {
 
 export async function getServerSideProps({ req, res }) {
     await applySession(req, res);
-    console.log('INDEX PROPS', req.session);
     if(!req.session.user) {
         return {props: {}};
     }

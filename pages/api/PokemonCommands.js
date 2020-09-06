@@ -1,81 +1,53 @@
-const db = require('../../lib/db');
-const PokemonData = require('../..//lib/PokemonData');
-//const PokemonUtilities = require('./PokemonUtilities');
+const db = require('./db');
+const Pokemon = require('./Pokemon');
+const PokemonData = require('./PokemonData');
+const PokemonUtilities = require('./PokemonUtilities');
 
 module.exports = {
-    async getPokemonList(userID, limit, offset) {
-        let pokemonList = await db.pokemon.findAll({
-            offset: offset,
-            limit: limit,
-            where: {userID: userID}});
-        pokemonList.forEach(el => el.name = PokemonData[el.pokemonID].name);
-        return pokemonList;
-    },
-    async getFilteredPokemonListCount(userID, searchObject) {
-        let whereObject = {userID: userID};
-        if(searchObject.symbol == '>') {
-            whereObject['totalIV'] = {
-                [db.Op.gt]: searchObject.iv
-            }
-        }
-        else if(searchObject.symbol == '<') {
-            whereObject['totalIV'] = {
-                [db.Op.lt]: searchObject.iv
-            }
-        }
-        if(searchObject.favorite) {
-            whereObject['favorite'] = searchObject.favorite;
-        }
-        if(searchObject.name) {
-            let keys = Object.keys(PokemonData);
-            for(var x=0;x<keys.length;x++) {
-                if(PokemonData[keys[x]].name.toLowerCase() == searchObject.name.toLowerCase()) {
-                    whereObject['pokemonID'] = PokemonData[keys[x]].pokedexNum;
-                    break;
-                }
-            }
-        }
-        let pokemonCount = await db.pokemon.count({
-            where: whereObject
+	async createPokemon(userID, pokemon) {
+        let pokemonCount = await this.getPokemonCount(userID);
+        let uniquePokemonID = await db.pokemon.create({
+            userID: userID,
+            pokemonID: pokemon.pokemonID,
+            nickname: pokemon.nickname,
+            level: pokemon.level,
+            gender: pokemon.gender,
+            hp: pokemon.hp,
+            maxHP: pokemon.maxHP,
+            atk: pokemon.atk,
+            def: pokemon.def,
+            spatk: pokemon.spatk,
+            spdef: pokemon.spdef,
+            spd: pokemon.spd,
+            hpIV: pokemon.hpIV,
+            atkIV: pokemon.atkIV,
+            defIV: pokemon.defIV,
+            spatkIV: pokemon.spatkIV,
+            spdefIV: pokemon.spdefIV,
+            spdIV: pokemon.spdIV,
+            shiny: pokemon.shiny,
+            shadow: pokemon.shadow,
+			active: 0,
+            partyPosition: (pokemonCount < 6) ? pokemonCount+1 : null,
+            totalIV: PokemonUtilities.calculateTotalIV(pokemon),
+            move1: pokemon.move1,
+            move1pp: pokemon.move1pp,
+            move2: pokemon.move2,
+            move2pp: pokemon.move2pp,
+            move3: pokemon.move3,
+            move3pp: pokemon.move3pp,
+            move4: pokemon.move4,
+            move4pp: pokemon.move4pp,
         });
-        return pokemonCount;
+        return uniquePokemonID.id;
     },
-    async getFilteredPokemonList(userID, limit, offset, searchObject) {
-        let whereObject = {userID: userID};
-        if(searchObject.symbol == '>') {
-            whereObject['totalIV'] = {
-                [db.Op.gt]: searchObject.iv
-            }
-        }
-        else if(searchObject.symbol == '<') {
-            whereObject['totalIV'] = {
-                [db.Op.lt]: searchObject.iv
-            }
-        }
-        if(searchObject.favorite) {
-            whereObject['favorite'] = searchObject.favorite;
-        }
-        if(searchObject.name) {
-            let keys = Object.keys(PokemonData);
-            for(var x=0;x<keys.length;x++) {
-                if(PokemonData[keys[x]].name.toLowerCase() == searchObject.name.toLowerCase()) {
-                    whereObject['pokemonID'] = PokemonData[keys[x]].pokedexNum;
-                    break;
-                }
-            }
-        }
-        let pokemonList = await db.pokemon.findAll({
-            offset: offset,
-            limit: limit,
-            where: whereObject
+	async getPokemonCount(userID) {
+        let count = await db.pokemon.count({
+            where: {userID: userID}
         });
-        pokemonList.forEach(function(pokemon) {
-            pokemon.name = PokemonData[pokemon.pokemonID].name;
-            pokemon.emoji = PokemonData[pokemon.pokemonID].emoji;
-        });
-        return pokemonList;
+        return count;
     },
-    async getDisplayPokemon(userID, uniquePokemonID) {
+	async getDisplayPokemon(userID, uniquePokemonID) {
         let pokemon = await this.getPokemon(userID, uniquePokemonID);
         if(!pokemon) {
             return null;
@@ -87,114 +59,55 @@ module.exports = {
         pokemon.amount = candy.amount;
         return pokemon;
     },
-    async getStrictPokemon(userID, uniquePokemonID) {
+	async getFilteredPokemonList(userID, limit, offset, searchObject) {
+        let whereObject = {userID: userID};
+        /*if(searchObject.symbol == '>') {
+            whereObject['totalIV'] = {
+                [db.Op.gt]: searchObject.iv
+            }
+        }
+        else if(searchObject.symbol == '<') {
+            whereObject['totalIV'] = {
+                [db.Op.lt]: searchObject.iv
+            }
+        }
+        if(searchObject.favorite) {
+            whereObject['favorite'] = searchObject.favorite;
+        }
+        if(searchObject.name) {
+            let keys = Object.keys(PokemonData);
+            for(var x=0;x<keys.length;x++) {
+                if(PokemonData[keys[x]].name.toLowerCase() == searchObject.name.toLowerCase()) {
+                    whereObject['pokemonID'] = PokemonData[keys[x]].pokedexNum;
+                    break;
+                }
+            }
+        }*/
+        let pokemonCount = await db.pokemon.findAndCountAll({
+            offset: offset,
+            limit: limit,
+            where: whereObject,
+            raw: true,
+        });
+		return {count: pokemonCount.count, rows: pokemonCount.rows};
+    },
+	async getPokemon(userID, uniquePokemonID) {
         let pokemon = await db.pokemon.findOne({
-            where: {userID: userID, id: uniquePokemonID}
+            where: {id: uniquePokemonID, userID: userID},
+            raw: true,
         });
         if(!pokemon) {
             return null;
         }
-        pokemon.setDataValue('name', PokemonData[pokemon.pokemonID].name);
-        return pokemon;
-    },
-    async getPokemon(userID, uniquePokemonID=0) {
-        let where = uniquePokemonID == 0 ? {active: 1, userID: userID} : {id: uniquePokemonID, userID: userID};
-        let pokemon = await db.pokemon.findOne({
-            where: where
-        });
-        if(pokemon) {
-            pokemon.setDataValue('stage', PokemonData[pokemon.pokemonID].stage);
-        }
-        return pokemon;
-    },
-    async insertPokemon(userID, pokemon, active) {
-        let candy;
-        switch(PokemonData[pokemon.pokemonID].stage) {
-            case 1:
-                candy = 3;
-                break;
-            case 2: 
-                candy = 5;
-                break;
-            case 3:
-                candy = 10;
-                break;
-        }
-        let uniquePokemonID = await this.createPokemon(userID, pokemon, active);
-        //await CandyCommands.addCandies(userID, pokemon.pokemonID, candy);
-        //await PokedexCommands.createOrUpdateEntry(userID, pokemon.pokemonID);
-        return uniquePokemonID;
-    },
-    /*async createPokemon(userID, pokemon, active) {
-        let uniquePokemonID = await db.pokemon.create({
-            userID: userID,
-            pokemonID: pokemon.pokemonID,
-            nickname: pokemon.nickname,
-            level: pokemon.level,
-            hp: pokemon.hp,
-            atk: pokemon.atk,
-            def: pokemon.def,
-            spatk: pokemon.spatk,
-            spdef: pokemon.spdef,
-            speed: pokemon.speed,
-            hpIV: pokemon.hpIV,
-            atkIV: pokemon.atkIV,
-            defIV: pokemon.defIV,
-            spatkIV: pokemon.spatkIV,
-            spdefIV: pokemon.spdefIV,
-            speedIV: pokemon.speedIV,
-            active: active,
-            shiny: pokemon.shiny,
-            totalIV: PokemonUtilities.calculateTotalIV(pokemon)
-        });
-        return uniquePokemonID.id;
-    },*/
-    async transferPokemon(userID, pokemon) {
-        await db.pokemon.destroy({
-            where: {userID: userID, id: pokemon.id}
-        });
-        //add candy
+        return new Pokemon(pokemon);
     },
     async setNickname(userID, id, nickname) {
         let where = (id == -1) ? {active: 1, userID: userID} : {id: id, userID : userID};
         await db.pokemon.update({
             nickname: nickname
-        }, {
-            where: where
-        });
+        }, { where: where });
     },
-	async changeActivePokemon(userID, pokemonID) {
-        await db.sequelize.query("UPDATE pokemon JOIN Users on pokemon.userID = Users.userID SET active = 0 WHERE Users.userID = ?",
-        {replacements: [userID]});
-        await db.sequelize.query("UPDATE pokemon JOIN Users on pokemon.userID = Users.userID SET active = 1 WHERE Users.userID = ? AND pokemon.id = ?",
-        {replacements: [userID, pokemonID]});
-	},
-	async getActivePokemon(userID) {
-        return await db.pokemon.findOne({
-            include: [{
-                model: db.user,
-                where: {userID: userID},
-            }],
-            where: {active: 1},
-        });
-    },
-    async levelUpPokemon(userID, uniquePokemonID, amount) {
-        let pokemon = await this.getPokemon(userID, uniquePokemonID);
-        let candyID = PokemonData[pokemon.pokemonID].candyID;
-        pokemon.level += amount;
-        this.updatePokemonStats(userID, pokemon);
-        let candy = await db.candy.findOne({
-            include: [{
-                model: db.user,
-                where: {userID: userID},
-            }],
-            where: {
-                candyID: candyID,
-            }
-        });
-        candy.decrement({'amount': amount});
-    },
-    /*async updatePokemonStats(userID, pokemon, evolveID) {
+	async updatePokemonStats(userID, pokemon, evolveID) {
         if(evolveID) {
             pokemon.pokemonID = evolveID;
         }
@@ -207,41 +120,12 @@ module.exports = {
             pokemonID: pokemon.pokemonID,
             level: pokemon.level,
             hp: pokemon.hp,
+            maxHP: pokemon.maxHP,
             atk: pokemon.atk,
             def: pokemon.def,
             spatk: pokemon.spatk,
             spdef: pokemon.spdef,
-            speed: pokemon.speed,
+            spd: pokemon.spd,
         }, {where: {id: pokemon.id}});
-    },*/
-    async getPokemonCount(userID) {
-        let count = await db.pokemon.count({
-            where: {userID: userID}
-        });
-        return count;
     },
-    async changePokemonIDForTrade(userID, uniquePokemonID) {
-        await db.pokemon.update({
-            userID: userID,
-        }, {
-            where: {id: uniquePokemonID}
-        });
-    },
-    async changeTransferStatus(uniquePokemonID, status) {
-        await db.pokemon.update({
-            canTransfer: status,
-        }, {
-            where: {id: uniquePokemonID}
-        });
-    },
-    async evolvePokemon(userID, uniquePokemonID, evolveID) {
-        let pokemon = await this.getPokemon(userID, uniquePokemonID);
-        await this.updatePokemonStats(userID, pokemon, evolveID);
-    },
-    async makePokemonFavorite(userID, uniquePokemonID) {
-        await db.pokemon.update({
-            favorite: true,
-            canTransfer: false,
-        }, {where: {userID: userID, id: uniquePokemonID}});
-    }
 }
